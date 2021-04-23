@@ -1,0 +1,191 @@
+{
+  "starting": {
+    "id": "j1_6",
+    "type": "dialog"
+  },
+  "characters": {
+    "GlobalValues": {
+      "name": "GlobalValues",
+      "output": "1",
+      "number": 1
+    }
+  },
+  "dialog": {
+    "j1_6": {
+      "character": "GlobalValues",
+      "time_limit": 0,
+      "text": "Number is: ${GlobalValues.number}, Fizzbuzz result is : ${GlobalValues.output}",
+      "time_path": null,
+      "options": [
+        {
+          "text": "Increase 1",
+          "operation": null,
+          "path": {
+            "id": "j1_8",
+            "type": "setter"
+          }
+        },
+        {
+          "text": "Decrease 1",
+          "operation": null,
+          "path": {
+            "id": "j1_7",
+            "type": "setter"
+          }
+        },
+        {
+          "text": "Wow, I hit the 'FizzBuzz', now let me out.",
+          "operation": {
+            "==": [
+              {
+                "%": [
+                  {
+                    "var": "GlobalValues.number"
+                  },
+                  15
+                ]
+              },
+              0
+            ]
+          },
+          "path": {}
+        }
+      ]
+    }
+  },
+  "setter": {
+    "j1_7": {
+      "variable": "GlobalValues.number",
+      "operation": {
+        "-": [
+          {
+            "var": "GlobalValues.number"
+          },
+          1
+        ]
+      },
+      "path": {
+        "id": "j1_9",
+        "type": "condition"
+      }
+    },
+    "j1_8": {
+      "variable": "GlobalValues.number",
+      "operation": {
+        "+": [
+          {
+            "var": "GlobalValues.number"
+          },
+          1
+        ]
+      },
+      "path": {
+        "id": "j1_9",
+        "type": "condition"
+      }
+    },
+    "j1_10": {
+      "variable": "GlobalValues.output",
+      "operation": {
+        "var": "GlobalValues.number"
+      },
+      "path": {
+        "id": "j1_6",
+        "type": "dialog"
+      }
+    },
+    "j1_11": {
+      "variable": "GlobalValues.output",
+      "operation": "Fizz",
+      "path": {
+        "id": "j1_6",
+        "type": "dialog"
+      }
+    },
+    "j1_12": {
+      "variable": "GlobalValues.output",
+      "operation": "FizzBuzz",
+      "path": {
+        "id": "j1_6",
+        "type": "dialog"
+      }
+    },
+    "j1_13": {
+      "variable": "GlobalValues.output",
+      "operation": "Buzz",
+      "path": {
+        "id": "j1_6",
+        "type": "dialog"
+      }
+    }
+  },
+  "condition": {
+    "j1_9": {
+      "operation": {
+        "if": [
+          {
+            "==": [
+              {
+                "%": [
+                  {
+                    "var": "GlobalValues.number"
+                  },
+                  15
+                ]
+              },
+              0
+            ]
+          },
+          0,
+          {
+            "==": [
+              {
+                "%": [
+                  {
+                    "var": "GlobalValues.number"
+                  },
+                  3
+                ]
+              },
+              0
+            ]
+          },
+          1,
+          {
+            "==": [
+              {
+                "%": [
+                  {
+                    "var": "GlobalValues.number"
+                  },
+                  5
+                ]
+              },
+              0
+            ]
+          },
+          2,
+          3
+        ]
+      },
+      "paths": [
+        {
+          "id": "j1_12",
+          "type": "setter"
+        },
+        {
+          "id": "j1_11",
+          "type": "setter"
+        },
+        {
+          "id": "j1_13",
+          "type": "setter"
+        },
+        {
+          "id": "j1_10",
+          "type": "setter"
+        }
+      ]
+    }
+  }
+}

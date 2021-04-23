@@ -1,2 +1,3 @@
-# dialogger-haxe
-Haxe port of the dialogger app.
+# Dialogger Haxe
+Import dialogger projects into haxe.
+> haxe -main Example --interp
