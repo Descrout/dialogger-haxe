@@ -1,9 +1,7 @@
 # Dialogger Haxe
 Import dialogger projects into haxe.
 > haxe -main Example --interp
-
 ## Example
-
 ```haxe
 // Read the dialogger project from file.
 final content:String = sys.io.File.getContent("fizzbuzz.json");
