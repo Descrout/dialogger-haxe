@@ -66,8 +66,18 @@ class Dialogger {
 				values.set(key, {character: character_name, field: field_name});
 			}
 		}
+	}
 
-		currentDialog = evaluate(starting);
+	public function start():Dialog {
+		return currentDialog = evaluate(starting);
+	}
+
+	public function getValue<T>(character:String, field:String): T {
+		return characters[character][field];
+	}
+
+	public function setValue(character:String, field:String, value:Dynamic) {
+		characters[character][field] = value;
 	}
 
 	public function getOption(i:Int):String {
@@ -88,90 +98,105 @@ class Dialogger {
 	}
 
 	private function resolveObject(field:String, op:Dynamic):BasicType {
-        final arr:Array<Dynamic> = op;
 		switch (field) {
 			case "var":
 				final name = values["${" + op + "}"];
 				return resolve(characters[name.character][name.field]);
 			case "+":
+				final arr:Array<Dynamic> = op;
 				var result:Dynamic = resolve(arr[0]).getParameters()[0];
 				for (i in (1...arr.length)) {
 					result += resolve(arr[i]).getParameters()[0];
 				}
 				return resolve(result);
 			case "-":
+				final arr:Array<Dynamic> = op;
 				var result:Dynamic = resolve(arr[0]).getParameters()[0];
 				for (i in (1...arr.length)) {
 					result -= resolve(arr[i]).getParameters()[0];
 				}
 				return resolve(result);
 			case "*":
+				final arr:Array<Dynamic> = op;
 				var result:Dynamic = resolve(arr[0]).getParameters()[0];
 				for (i in (1...arr.length)) {
 					result *= resolve(arr[i]).getParameters()[0];
 				}
 				return resolve(result);
 			case "/":
+				final arr:Array<Dynamic> = op;
 				var result:Dynamic = resolve(arr[0]).getParameters()[0];
 				for (i in (1...arr.length)) {
 					result /= resolve(arr[i]).getParameters()[0];
 				}
 				return resolve(result);
 			case "%":
+				final arr:Array<Dynamic> = op;
 				var result:Dynamic = resolve(arr[0]).getParameters()[0];
 				for (i in (1...arr.length)) {
 					result %= resolve(arr[i]).getParameters()[0];
 				}
 				return resolve(result);
 			case "max":
+				final arr:Array<Dynamic> = op;
 				var result:Dynamic = resolve(arr[0]).getParameters()[0];
 				for (i in (1...arr.length)) {
 					result = Math.max(result, resolve(arr[i]).getParameters()[0]);
 				}
 				return resolve(result);
 			case "min":
+				final arr:Array<Dynamic> = op;
 				var result:Dynamic = resolve(arr[0]).getParameters()[0];
 				for (i in (1...arr.length)) {
 					result = Math.min(result, resolve(arr[i]).getParameters()[0]);
 				}
 				return resolve(result);
 			case "and":
+				final arr:Array<Dynamic> = op;
 				var result:Bool = resolve(arr[0]).getParameters()[0];
 				for (i in (1...arr.length)) {
 					result = result && resolve(arr[i]).getParameters()[0];
 				}
 				return BasicType.Boolean(result);
 			case "or":
+				final arr:Array<Dynamic> = op;
 				var result:Bool = resolve(arr[0]).getParameters()[0];
 				for (i in (1...arr.length)) {
 					result = result || resolve(arr[i]).getParameters()[0];
 				}
 				return BasicType.Boolean(result);
 			case "==" | "===":
+				final arr:Array<Dynamic> = op;
 				final first:Dynamic = resolve(arr[0]).getParameters()[0];
 				final second:Dynamic = resolve(arr[1]).getParameters()[0];
 				return BasicType.Boolean(first == second);
 			case "!=" | "!==":
+				final arr:Array<Dynamic> = op;
 				final first:Dynamic = resolve(arr[0]).getParameters()[0];
 				final second:Dynamic = resolve(arr[1]).getParameters()[0];
 				return BasicType.Boolean(first != second);
 			case ">":
+				final arr:Array<Dynamic> = op;
 				final first:Dynamic = resolve(arr[0]).getParameters()[0];
 				final second:Dynamic = resolve(arr[1]).getParameters()[0];
 				return BasicType.Boolean(first > second);
 			case "<":
+				final arr:Array<Dynamic> = op;
 				final first:Dynamic = resolve(arr[0]).getParameters()[0];
 				final second:Dynamic = resolve(arr[1]).getParameters()[0];
 				return BasicType.Boolean(first < second);
 			case ">=":
+				final arr:Array<Dynamic> = op;
 				final first:Dynamic = resolve(arr[0]).getParameters()[0];
 				final second:Dynamic = resolve(arr[1]).getParameters()[0];
 				return BasicType.Boolean(first >= second);
 			case "<=":
+				final arr:Array<Dynamic> = op;
 				final first:Dynamic = resolve(arr[0]).getParameters()[0];
 				final second:Dynamic = resolve(arr[1]).getParameters()[0];
 				return BasicType.Boolean(first <= second);
 			case "if":
+				final arr:Array<Dynamic> = op;
 				var i = 0;
 				while (i < arr.length - 2) {
 					final is_true:Bool = resolve(arr[i]).getParameters()[0];

@@ -2,10 +2,13 @@ import dialogger.Dialogger;
 
 class Example {
 	static public function main():Void {
-		// Read dialogger project from file.
+		// Read the dialogger project from file.
 		final content:String = sys.io.File.getContent("fizzbuzz.json");
 		// Initialize dialogger by providing any String content.
 		final dialogger = new Dialogger(content);
+
+		// Start the dialogger
+		dialogger.start();
 
 		// Loop until you run out of dialogs.
 		while (dialogger.currentDialog != null) {
@@ -14,7 +17,7 @@ class Example {
 			trace(dialogger.currentDialog.text);
 			trace("-------------------------------------------");
 
-			// Print the dialog choices with 'index-)' prefix.
+			// Print the dialog choices with the 'index-)' prefix.
 			for (i in (0...dialogger.currentDialog.options.length)) {
 				trace('${i + 1}-) ${dialogger.getOption(i)}');
 			}
